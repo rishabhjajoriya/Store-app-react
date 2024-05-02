@@ -34,7 +34,13 @@ export default useShoppingCart
 
 export function ShoppingCartProvider({children} : ShoppingCartProviderProps){
     const [cartItems, setcartItems] = useState<CartItem[]>([])
+    const [isOpen, setisOpen] = useState(false)
+   
 
+    const cartQuantity = cartItems.reduce((quantity,item) => item.quantity + quantity,0)
+
+    const openCart = () => setisOpen(true);
+    const closeCart = () =>setisOpen(false);
     function getItemQuantity(id:number){
         return cartItems.find(item => item.id === id) ?. quantity || 0
     }
@@ -77,7 +83,7 @@ export function ShoppingCartProvider({children} : ShoppingCartProviderProps){
        })
     }
 
-    return <ShoppingCartContext.Provider value={{getItemQuantity,increaseCartQuantity,decreaseCartQuantity,removeFromCart}} > 
+    return <ShoppingCartContext.Provider value={{getItemQuantity,increaseCartQuantity,decreaseCartQuantity,removeFromCart, cartQuantity, cartItems,openCart,closeCart }} > 
         {children}
     </ShoppingCartContext.Provider>
 }
