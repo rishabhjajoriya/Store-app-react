@@ -12,7 +12,7 @@ type CartItemProps = {
 const CartItem = ({id,quantity} : CartItemProps ) => {
     const {removeFromCart} = useShoppingCart();
     const item = storeitems.find(i => i.id === id)
-    if(item == null)return null
+    if(item == null) return null
   return (
     <div>
       <Stack direction='horizontal' gap={2} className='d-flex align-items-center'>
